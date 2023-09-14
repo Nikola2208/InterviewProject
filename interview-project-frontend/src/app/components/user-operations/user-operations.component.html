@@ -1,0 +1,99 @@
+<div class="relative">
+  <form>
+    <table>
+      <tr style="background: white">
+        <td><label for="name">Name: </label></td>
+        <td><input type="text" id="name" [(ngModel)]="user.name" name="name" disabled/></td>
+      </tr>
+      <tr style="background: white">
+        <td><label for="surname">Surname: </label></td>
+        <td><input type="text" id="surname" [(ngModel)]="user.surname" name="surname" disabled/></td>
+      </tr>
+      <tr style="background: white">
+        <td><label for="number">Number: </label></td>
+        <td><input type="number" id="number" [(ngModel)]="user.address.number" name="number"/></td>
+      </tr>
+      <tr style="background: white">
+        <td><label for="street">Street: </label></td>
+        <td><input type="text" id="street" [(ngModel)]="user.address.street" name="street"/></td>
+      </tr>
+      <tr style="background: white">
+        <td><label for="city">City: </label></td>
+        <td><input type="text" id="city" [(ngModel)]="user.address.city" name="city"/></td>
+      </tr>
+      <tr style="background: white">
+        <td><label for="country">Country: </label></td>
+        <td><input type="text" id="country" [(ngModel)]="user.address.country" name="country"/></td>
+      </tr>
+      <tr style="background: white">
+        <td colspan="2" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+          <button (click)="updateAddress()" type="button" [disabled]="checkAddress()">Update address</button>
+        </td>
+      </tr>
+      <tr style="background: white">
+        <td><label for="email">Email: </label></td>
+        <td><input type="email" id="email" [(ngModel)]="user.account.email" name="email"/></td>
+      </tr>
+      <tr style="background: white">
+        <td colspan="2" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+          <button (click)="updateEmail()" type="button" [disabled]="checkEmail()">Update email</button>
+        </td>
+      </tr>
+      <tr style="background: white">
+        <td><label for="username">Username: </label></td>
+        <td><input type="text" id="username" [(ngModel)]="user.account.username" name="username" disabled/></td>
+      </tr>
+      <tr style="background: white">
+        <td><label for="role">Role: </label></td>
+        <td><input type="text" id="role" [(ngModel)]="user.role" name="role" disabled/></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="background: white; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+          <hr/>
+        </td>
+      </tr>
+      <tr style="background: white">
+        <td colspan="2" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+          <button [disabled]="userId === 0" (click)="delete()" type="button">Delete user</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<br/>
+<div *ngIf="userRole === 'admin'" class="relative">
+  <table class="users">
+    <thead class="header">
+      <tr>
+        <th rowspan="2">ID</th>
+        <th rowspan="2">Name</th>
+        <th rowspan="2">Surname</th>
+        <th style="text-align: center;" colspan="4">Address</th>
+        <th style="text-align: center;" colspan="2">Account</th>
+        <th rowspan="2">Role</th>
+      </tr>
+      <tr>
+        <th style="text-align: center;">Number</th>
+        <th style="text-align: center;">Street</th>
+        <th style="text-align: center;">City</th>
+        <th style="text-align: center;">Country</th>
+        <th style="text-align: center;">Username</th>
+        <th style="text-align: center;">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" >
+        <th>{{ user.id }}</th>
+        <td>{{ user.name }}</td>
+        <td>{{ user.surname }}</td>
+        <td>{{ user.address.number }}</td>
+        <td>{{ user.address.street }}</td>
+        <td>{{ user.address.city }}</td>
+        <td>{{ user.address.country }}</td>
+        <td>{{ user.account.username }}</td>
+        <td>{{ user.account.email }}</td>
+        <td>{{ user.role }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

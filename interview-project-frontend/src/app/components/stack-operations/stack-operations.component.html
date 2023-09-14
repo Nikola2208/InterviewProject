@@ -1,0 +1,44 @@
+<div class="relative">
+    <form>
+        <table>
+            <tr style="background: white">
+                <td><label for="name">Order name: </label></td>
+                <td>
+                    <select style="width: 100%;" #name id="name" name="name" [(ngModel)]="selectedOrderId">
+                        <option *ngFor="let order of approvedOrders" [value]="order.id"> {{ order.name }} </option>
+                    </select>
+                </td>
+            </tr>
+            <tr style="background: white">
+                <td colspan="2" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+                    <button (click)="create()" type="button" [disabled]="checkOrder()">Create stacks</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<br/>
+<div class="relative">
+    <table class="stacks">
+      <thead class="header">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Number of items in stack</th>
+          <th>Order name</th>
+          <th>Total price of order</th>
+          <th>Items in stack</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stack of stacks" >
+          <th>{{ stack.id }}</th>
+          <td>{{ stack.name }}</td>
+          <td>{{ stack.items_per_stack }}</td>
+          <td>{{ stack.order.name }}</td>
+          <td>{{ stack.order.total_price }}</td>
+          <td>{{ stack.group.item.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

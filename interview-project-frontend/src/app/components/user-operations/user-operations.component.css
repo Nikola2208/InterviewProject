@@ -1,0 +1,36 @@
+div.relative {
+    position: relative;
+    left: 25px;
+    top: 15px;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+button {
+    border: 1px solid #0066cc;
+    background-color: #0099cc;
+    color: #ffffff;
+    padding: 5px 10px;
+}
+
+th, td {
+  padding: 5px;
+}
+
+tr:nth-child(even){
+background: lightgray;
+}
+
+table.users {
+border-collapse: collapse;
+border: black 1px solid;
+}
+
+.header {
+border-bottom: 1pt solid black;
+}

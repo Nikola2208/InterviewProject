@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order PDF</title>
+    <style>
+        tr {
+            padding: 2px;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr style="padding: 0">
+            <td style="text-align: left"><h1>ORDER REVIEW</h1></td>
+            <td style="text-align: right">{{ date }}</td>
+        </tr>
+    </table>
+    <p><b>Customer:</b> {{ name }} {{ surname }}</p>
+    <p><b>Total price:</b> {{ total_price }} RSD</p>
+    <table style="background-color: #f5f5f5; border: black 1px solid;">
+        <tr style="background-color: darkgray">
+            {% for header in headings %}
+            <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for cell in row %}
+            <td>{{ cell }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

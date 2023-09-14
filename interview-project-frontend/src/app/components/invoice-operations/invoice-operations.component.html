@@ -1,0 +1,56 @@
+<div class="relative">
+    <form>
+        <table>
+            <tr style="background: white">
+                <td><label for="name">Order name: </label></td>
+                <td>
+                    <select style="width: 100%;" #name id="name" name="name" [(ngModel)]="selectedOrderId" (change)="selectOrder()">
+                        <option *ngFor="let order of approvedOrders" [value]="order.id"> {{ order.name }} </option>
+                    </select>
+                </td>
+            </tr>
+            <tr style="background: white">
+                <td><label for="line">Order line: </label></td>
+                <td>
+                    <select style="width: 100%;" #line id="line" name="line" [(ngModel)]="selectedLines" multiple>
+                        <option *ngFor="let line of orderLines" [value]="line.item.name"> {{ line.item.name }} </option>
+                    </select>
+                </td>
+            </tr>
+            <tr style="background: white">
+                <td colspan="2" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+                    <button (click)="create()" type="button" [disabled]="checkInvoice()">Create invoice</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<br/>
+<div class="relative">
+    <table class="invoices">
+      <thead class="header">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Customer</th>
+          <th>Order name</th>
+          <th>Total price of order</th>
+          <th>Items in invoice</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let invoice of invoices" >
+          <th>{{ invoice.id }}</th>
+          <td>{{ invoice.name }}</td>
+          <td>{{ invoice.user.name }} {{invoice.user.surname}}</td>
+          <td>{{ invoice.order.name }}</td>
+          <td>{{ invoice.order.total_price }}</td>
+          <td>{{ invoice.invoice_groups_string }}</td>
+          <td style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+            <button *ngIf="userRole === 'admin'" (click)="delete(invoice.id)" type="button">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

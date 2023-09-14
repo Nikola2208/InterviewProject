@@ -1,0 +1,104 @@
+<div class="relative">
+    <form>
+        <table>
+            <tr style="background: white">
+                <td><label for="name">Item name: </label></td>
+                <td>
+                    <select style="width: 100%;" #name id="name" name="name" [(ngModel)]="selectedItem">
+                        <option *ngFor="let item of items" [value]="item.name"> {{ item.name }} </option>
+                    </select>
+                </td>
+            </tr>
+            <tr style="background: white">
+                <td><label for="total_amount">Total amount: </label></td>
+                <td><input type="number" id="total_amount" [(ngModel)]="total_amount" name="total_amount"/></td>
+            </tr>
+            <tr style="background: white">
+                <td colspan="2" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+                    <button (click)="add()" type="button" [disabled]="checkOrderLine()">Add to order</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<br/>
+<div class="relative">
+    <table class="lines">
+        <thead class="header">
+            <tr>
+                <th colspan="3" style="text-align: center;">Items in order</th>
+            </tr>
+            <tr>
+                <th>Item name</th>
+                <th>Total amount</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let line of orderLines" >
+                <td>{{ line.item_name }}</td>
+                <td>x{{ line.total_amount }}</td>
+                <td style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+                    <button (click)="remove(line)" type="button">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br/>
+<div class="relative">
+    <form>
+        <table>
+            <tr style="background: white">
+                <td><label for="oname">Order name: </label></td>
+                <td><input type="text" id="oname" [(ngModel)]="oname" name="oname"/></td>
+            </tr>
+            <tr style="background: white">
+                <td colspan="2" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+                    <button (click)="create()" type="button" [disabled]="checkOrder()">Create order</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<br/>
+<div class="relative">
+    <table class="orders">
+      <thead class="header">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Customer</th>
+          <th>Items</th>
+          <th>Total price</th>
+          <th>Status</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders" >
+          <th>{{ order.id }}</th>
+          <td>{{ order.name }}</td>
+          <td>{{ order.user.name }} {{order.user.surname}}</td>
+          <td>{{ order.groups_string }}</td>
+          <td>{{ order.total_price }} RSD</td>
+          <td [ngClass]="getClassForValue(order.status)">{{ order.status }}</td>
+          <td style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+            <button *ngIf="checkUserId(order) && order.status === 'waiting'" (click)="delete(order)" type="button">Cancel</button>
+          </td>
+          <td style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+            <button *ngIf="userRole === 'admin' && order.status === 'waiting'" (click)="accept(order)" type="button">Accept</button>
+          </td>
+          <td style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+            <button *ngIf="userRole === 'admin' && order.status === 'waiting'" (click)="reject(order)" type="button">Reject</button>
+          </td>
+          <td style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+            <button *ngIf="userRole === 'admin' && order.status === 'approved'" (click)="createPDF(order)" type="button">Download PDF</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
